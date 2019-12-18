@@ -17,7 +17,8 @@ const fetchRepos = async function(searchTerm) {
         `https://api.github.com/search/repositories?q=${searchTerm}`
     )
 
-    const
+    try {
+        const
         totalCount = result.data.total_count,
         repos = result.data.items.map(item => {
             return {
@@ -29,17 +30,24 @@ const fetchRepos = async function(searchTerm) {
             }
         })
 
-    return { repos, totalCount }
+        return { repos, totalCount }
+    } catch {
+        throw Error('An error occurred')
+    }
+}
+
+const initialState = {
+    hasErrorOccurred: false,
+    isFetchingData: false,
+    repos: [],
+    totalCount: undefined
 }
 
 function App() {
     const
         classes = useStyles(),
         [ searchTerm, setSearchTerm ] = useState(''),
-        [data, setData] = useState({
-            totalCount: undefined,
-            repos: []
-        }),
+        [data, setData] = useState({ ...initialState }),
         noSearchPerformedMessage = searchTerm ? null :
             <Paper className={classes.root}>
                 <Typography component="p">
@@ -51,18 +59,35 @@ function App() {
                 <Typography component="p">
                     A total of {data.totalCount} repos are found!
                 </Typography>
+            </Paper> : null,
+        errorMessage = data.hasErrorOccurred ? 
+            <Paper className={classes.root}>
+                <Typography component="p">
+                    An unexpected error occurred; please try again later!
+                </Typography>
+            </Paper> : null,
+        loadingMessage = data.isFetchingData ? 
+            <Paper className={classes.root}>
+                <Typography component="p">
+                    Data fetcing is in progress; hold tight!
+                </Typography>
             </Paper> : null
     
     useEffect(() => {
         const fetchAndSetData = async () => {
+            setData({ ...initialState, isFetchingData: true })
             const result = await fetchRepos(searchTerm)
-            setData(result)
+            setData({ ...initialState, ...result })
         }
 
         if (searchTerm) {
-            fetchAndSetData()
+            try {
+                fetchAndSetData()
+            } catch {
+                setData({ ...initialState, hasErrorOccurred: true })
+            }
         } else {
-            setData({ totalCount: undefined, repos: [] })
+            setData({ ...initialState })
         }
     }, [searchTerm])
 
@@ -73,6 +98,8 @@ function App() {
             />
             { noSearchPerformedMessage }
             { dataInformationMessage }
+            { errorMessage }
+            { loadingMessage }
         </div>
     );
 }
