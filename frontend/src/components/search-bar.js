@@ -1,7 +1,19 @@
-import React from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { AppBar, InputBase, Toolbar, Typography } from "@material-ui/core"
 import { fade, makeStyles } from "@material-ui/core/styles"
 import SearchIcon from "@material-ui/icons/Search"
+
+const debounce = function(func, wait) {
+    let timeout
+    return function(...args) {
+        if (timeout) clearTimeout(timeout)
+
+        timeout = setTimeout(() => {
+            timeout = null
+            func.apply(null, args)
+        }, wait)
+    }
+}
 
 const useStyles = makeStyles(theme => ({
     appbar: {
@@ -45,8 +57,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function({ searchTerm, onSearchTermChange }) {
-    const classes = useStyles()
+export default function({ onSearchTermChange }) {
+    const
+        classes = useStyles(),
+        [term, setTerm] = useState(""),
+        debounceOnSearhTerm = useCallback(debounce(onSearchTermChange, 500), [])
+
+    useEffect(() => {
+        debounceOnSearhTerm(term)
+    }, [debounceOnSearhTerm, term])
 
     return (
         <AppBar position="static" className={classes.appbar}>
@@ -64,8 +83,8 @@ export default function({ searchTerm, onSearchTermChange }) {
                         root: classes.inputRoot,
                         input: classes.inputInput
                     }}
-                    value={searchTerm}
-                    onChange={e => onSearchTermChange(e.target.value)}
+                    value={term}
+                    onChange={e => setTerm(e.target.value)}
                 />
                 </div>
             </Toolbar>

@@ -26,7 +26,6 @@ function App() {
         <div className="App">
             <SearchBar 
                 onSearchTermChange={searchTerm => setSearchTerm(searchTerm)}
-                searchTerm={searchTerm}
             />
             <Paper className={classes.root}>
                 <Typography component="p">
