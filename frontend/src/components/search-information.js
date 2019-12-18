@@ -1,16 +1,16 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from "@material-ui/core"
+import { CircularProgress, Paper, Typography } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.spacing(1),
         padding: theme.spacing(3, 2),
         textAlign: 'center'
-    },
+    }
 }))
 
-const Message = ({ text }) => {
+const Message = ({ text, children }) => {
     const classes = useStyles()
 
     return (
@@ -18,6 +18,7 @@ const Message = ({ text }) => {
             <Typography component="p">
                 { text }
             </Typography>
+            {children}
         </Paper> 
     )
 }
@@ -31,7 +32,9 @@ export default function({ searchTerm, totalCount, hasErrorOccurred, isFetchingDa
         errorMessage = hasErrorOccurred ?
             <Message text={"An unexpected error occurred; please try again later!"}/> : null,
         loadingMessage = isFetchingData ?
-            <Message text={"Data fetcing is in progress; hold tight!!"}/> : null
+            <Message text={"Data fetcing is in progress; hold tight!!"}>
+                <CircularProgress/>
+            </Message> : null
 
     return (
         <>
