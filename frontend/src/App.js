@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
-//import logo from './logo.svg';
- 
+import React from 'react';
+import { Paper, Typography } from "@material-ui/core"
+import { makeStyles } from '@material-ui/core/styles';
+import SearchBar from './components/search-bar'
 
-class App extends Component {
-  render() {
+const useStyles = makeStyles(theme => ({
+    root: {
+        margin: theme.spacing(1),
+        padding: theme.spacing(3, 2),
+        textAlign: 'center'
+    },
+}));
+
+function App() {
+    const classes = useStyles();
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-
-        <or>
-          <li>Fetch Data from a public API <a href="https://github.com/toddmotto/public-apis">Samples</a></li>
-          <li>Display data from API onto your page (Table, List, etc.)</li>
-          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-        </or>   
-       
-        </header>
-      </div>
+        <div className="App">
+            <SearchBar/>
+            <Paper className={classes.root}>
+                <Typography component="p">
+                    Please submit searh term to see relevant repositories!
+                </Typography>
+            </Paper>
+        </div>
     );
-  }
 }
 
 export default App;
