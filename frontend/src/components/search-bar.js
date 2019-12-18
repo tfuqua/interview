@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { AppBar, InputBase, Toolbar, Typography } from "@material-ui/core"
-import { fade, makeStyles } from "@material-ui/core/styles"
-import SearchIcon from "@material-ui/icons/Search"
+import React, { useCallback, useEffect, useState } from 'react'
+import { AppBar, InputBase, Toolbar, Typography } from '@material-ui/core'
+import { fade, makeStyles } from '@material-ui/core/styles'
+import SearchIcon from '@material-ui/icons/Search'
 
 const debounce = function(func, wait) {
     let timeout
@@ -23,34 +23,34 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     search: {
-        position: "relative",
+        position: 'relative',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: fade(theme.palette.common.white, 0.15),
-        "&:hover": {
+        '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25)
         },
         marginLeft: theme.spacing(1),
-        width: "auto"
+        width: 'auto'
     },
     searchIcon: {
         width: theme.spacing(7),
-        height: "100%",
-        position: "absolute",
-        pointerEvents: "none",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     inputRoot: {
-        color: "inherit"
+        color: 'inherit'
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("sm")]: {
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
             width: 120,
-            "&:focus": {
+            '&:focus': {
             width: 200
             }
         }
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 export default function({ isFetchingData, onSearchTermChange }) {
     const
         classes = useStyles(),
-        [term, setTerm] = useState(""),
+        [term, setTerm] = useState(''),
         debounceOnSearhTerm = useCallback(debounce(onSearchTermChange, 500), [])
 
     useEffect(() => {
@@ -68,9 +68,9 @@ export default function({ isFetchingData, onSearchTermChange }) {
     }, [debounceOnSearhTerm, term])
 
     return (
-        <AppBar position="static" className={classes.appbar}>
+        <AppBar position='static' className={classes.appbar}>
             <Toolbar>
-                <Typography className={classes.title} variant="h6" noWrap>
+                <Typography className={classes.title} variant='h6' noWrap>
                     Github Repo Search
                 </Typography>
                 <div className={classes.search}>
@@ -79,7 +79,7 @@ export default function({ isFetchingData, onSearchTermChange }) {
                 </div>
                 <InputBase
                     disabled={isFetchingData}
-                    placeholder="Term..."
+                    placeholder='Term...'
                     classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput

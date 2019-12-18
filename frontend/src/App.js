@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import { SearchBar, SearchInformation } from './components'
+import { SearchBar, SearchInformation, SearchResult } from './components'
 
 const fetchRepos = async function(searchTerm) {
     const result = await axios(
@@ -36,7 +36,8 @@ const initialState = {
 function App() {
     const
         [ searchTerm, setSearchTerm ] = useState(''),
-        [data, setData] = useState({ ...initialState })
+        [data, setData] = useState({ ...initialState }),
+        { repos, totalCount, isFetchingData, hasErrorOccurred } = data
     
     useEffect(() => {
         const fetchAndSetData = async () => {
@@ -57,17 +58,20 @@ function App() {
     }, [searchTerm])
 
     return (
-        <div className="App">
+        <div className='App'>
             <SearchBar
-                isFetchingData={data.isFetchingData}
+                isFetchingData={isFetchingData}
                 onSearchTermChange={searchTerm => setSearchTerm(searchTerm)}
             />
             <SearchInformation
                 searchTerm={searchTerm}
-                totalCount={data.totalCount}
-                hasErrorOccurred={data.hasErrorOccurred}
-                isFetchingData={data.isFetchingData}
+                totalCount={totalCount}
+                hasErrorOccurred={hasErrorOccurred}
+                isFetchingData={isFetchingData}
             />
+            { repos.length > 0 ?
+                <SearchResult repos={repos}/> : null
+            }
         </div>
     );
 }
