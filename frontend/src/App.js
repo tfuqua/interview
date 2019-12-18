@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Typography } from "@material-ui/core"
-import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
-import SearchBar from './components/search-bar'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        margin: theme.spacing(1),
-        padding: theme.spacing(3, 2),
-        textAlign: 'center'
-    },
-}))
+import { SearchBar, SearchInformation } from './components'
 
 const fetchRepos = async function(searchTerm) {
     const result = await axios(
@@ -45,33 +35,8 @@ const initialState = {
 
 function App() {
     const
-        classes = useStyles(),
         [ searchTerm, setSearchTerm ] = useState(''),
-        [data, setData] = useState({ ...initialState }),
-        noSearchPerformedMessage = searchTerm ? null :
-            <Paper className={classes.root}>
-                <Typography component="p">
-                    Please submit searh term to see relevant repositories!
-                </Typography>
-            </Paper>,
-        dataInformationMessage = data.totalCount ? 
-            <Paper className={classes.root}>
-                <Typography component="p">
-                    A total of {data.totalCount} repos are found!
-                </Typography>
-            </Paper> : null,
-        errorMessage = data.hasErrorOccurred ? 
-            <Paper className={classes.root}>
-                <Typography component="p">
-                    An unexpected error occurred; please try again later!
-                </Typography>
-            </Paper> : null,
-        loadingMessage = data.isFetchingData ? 
-            <Paper className={classes.root}>
-                <Typography component="p">
-                    Data fetcing is in progress; hold tight!
-                </Typography>
-            </Paper> : null
+        [data, setData] = useState({ ...initialState })
     
     useEffect(() => {
         const fetchAndSetData = async () => {
@@ -96,10 +61,12 @@ function App() {
             <SearchBar 
                 onSearchTermChange={searchTerm => setSearchTerm(searchTerm)}
             />
-            { noSearchPerformedMessage }
-            { dataInformationMessage }
-            { errorMessage }
-            { loadingMessage }
+            <SearchInformation
+                searchTerm={searchTerm}
+                totalCount={data.totalCount}
+                hasErrorOccurred={data.hasErrorOccurred}
+                isFetchingData={data.isFetchingData}
+            />
         </div>
     );
 }
