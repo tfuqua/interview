@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function() {
+export default function({ searchTerm, onSearchTermChange }) {
     const classes = useStyles()
 
     return (
@@ -64,6 +64,8 @@ export default function() {
                         root: classes.inputRoot,
                         input: classes.inputInput
                     }}
+                    value={searchTerm}
+                    onChange={e => onSearchTermChange(e.target.value)}
                 />
                 </div>
             </Toolbar>
