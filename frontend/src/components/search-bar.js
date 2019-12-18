@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function({ onSearchTermChange }) {
+export default function({ isFetchingData, onSearchTermChange }) {
     const
         classes = useStyles(),
         [term, setTerm] = useState(""),
@@ -78,6 +78,7 @@ export default function({ onSearchTermChange }) {
                     <SearchIcon />
                 </div>
                 <InputBase
+                    disabled={isFetchingData}
                     placeholder="Term..."
                     classes={{
                         root: classes.inputRoot,

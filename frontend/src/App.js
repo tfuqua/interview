@@ -58,7 +58,8 @@ function App() {
 
     return (
         <div className="App">
-            <SearchBar 
+            <SearchBar
+                isFetchingData={data.isFetchingData}
                 onSearchTermChange={searchTerm => setSearchTerm(searchTerm)}
             />
             <SearchInformation
