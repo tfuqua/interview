@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import { makeStyles } from '@material-ui/core/styles'
 import { SearchBar, SearchInformation, SearchResult } from './components'
 
 const fetchRepos = async function(searchTerm) {
@@ -33,8 +34,18 @@ const initialState = {
     totalCount: undefined
 }
 
+const useStyles = makeStyles(theme => ({
+    stickyHeader: {
+        backgroundColor: theme.palette.common.white,
+        position: 'sticky',
+        top: 0,
+        zIndex: 3
+    }
+}))
+
 function App() {
     const
+        classes = useStyles(),
         [ searchTerm, setSearchTerm ] = useState(''),
         [data, setData] = useState({ ...initialState }),
         { repos, totalCount, isFetchingData, hasErrorOccurred } = data
@@ -59,16 +70,18 @@ function App() {
 
     return (
         <div className='App'>
-            <SearchBar
-                isFetchingData={isFetchingData}
-                onSearchTermChange={searchTerm => setSearchTerm(searchTerm)}
-            />
-            <SearchInformation
-                searchTerm={searchTerm}
-                totalCount={totalCount}
-                hasErrorOccurred={hasErrorOccurred}
-                isFetchingData={isFetchingData}
-            />
+            <div className={classes.stickyHeader}>
+                <SearchBar
+                    isFetchingData={isFetchingData}
+                    onSearchTermChange={searchTerm => setSearchTerm(searchTerm)}
+                />
+                <SearchInformation
+                    searchTerm={searchTerm}
+                    totalCount={totalCount}
+                    hasErrorOccurred={hasErrorOccurred}
+                    isFetchingData={isFetchingData}
+                />
+            </div>
             { repos.length > 0 ?
                 <SearchResult repos={repos}/> : null
             }
