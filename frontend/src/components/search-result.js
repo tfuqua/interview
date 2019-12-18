@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import {
     Avatar,
+    Hidden,
     Paper,
     Table,
     TableBody,
@@ -45,23 +46,27 @@ export default function({ repos })
             <Table>
                 <TableHead>
                     <TableRow>
-                    <StyledTableCell>Avatar</StyledTableCell>
-                    <StyledTableCell>Repo</StyledTableCell>
-                    <StyledTableCell>Language</StyledTableCell>
-                    <StyledTableCell align='right'>Stars</StyledTableCell>
-                    <StyledTableCell>Description</StyledTableCell>
+                        <StyledTableCell>Avatar</StyledTableCell>
+                        <StyledTableCell>Repo</StyledTableCell>
+                        <StyledTableCell>Language</StyledTableCell>
+                        <StyledTableCell align='right'>Stars</StyledTableCell>
+                        <Hidden smDown>
+                            <StyledTableCell>Description</StyledTableCell>
+                        </Hidden>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {repos.map(repo => (
                         <StyledTableRow key={repo.name}>
-                        <StyledTableCell>
-                            <Avatar alt={repo.name} src={repo.avatarUrl} />
-                        </StyledTableCell>
-                        <StyledTableCell>{repo.name}</StyledTableCell>
-                        <StyledTableCell>{repo.language}</StyledTableCell>
-                        <StyledTableCell align='right'>{repo.stars}</StyledTableCell>
-                        <StyledTableCell>{repo.description}</StyledTableCell>
+                            <StyledTableCell>
+                                <Avatar alt={repo.name} src={repo.avatarUrl} />
+                            </StyledTableCell>
+                            <StyledTableCell>{repo.name}</StyledTableCell>
+                            <StyledTableCell>{repo.language}</StyledTableCell>
+                            <StyledTableCell align='right'>{repo.stars}</StyledTableCell>
+                            <Hidden smDown>
+                                <StyledTableCell>{repo.description}</StyledTableCell>
+                            </Hidden>
                         </StyledTableRow>
                     ))}
                 </TableBody>
