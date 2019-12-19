@@ -1,12 +1,15 @@
 package com.interview.employee.service;
 
 import com.interview.core.payload.exception.ResourceNotFoundException;
+import com.interview.employee.controller.payload.EmployeeFilterRequestPayload;
 import com.interview.employee.controller.payload.EmployeeUpsertRequestPayload;
 import com.interview.employee.exception.EmailInUseException;
 import com.interview.employee.repository.EmployeeRepository;
 import com.interview.entity.Employee;
 import com.interview.entity.enums.RecordStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,11 @@ public class EmployeeService {
         Employee active = employee.orElseThrow(()->new ResourceNotFoundException(("Employee not found")));
 
         return active;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Employee> filterActiveEmployees(EmployeeFilterRequestPayload filterRequestPayload, Pageable pageable) {
+        return employeeRepository.filterActiveEmployees(filterRequestPayload.getUser(), pageable);
     }
 
     @Transactional
