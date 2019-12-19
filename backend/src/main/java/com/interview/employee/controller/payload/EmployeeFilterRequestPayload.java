@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class EmployeeFilterRequestPayload implements RequestPayload {
-    private String user;
+    private String employee;
 }

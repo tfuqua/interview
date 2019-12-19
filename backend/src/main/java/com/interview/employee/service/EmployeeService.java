@@ -34,7 +34,7 @@ public class EmployeeService {
 
     @Transactional(readOnly = true)
     public Page<Employee> filterActiveEmployees(EmployeeFilterRequestPayload filterRequestPayload, Pageable pageable) {
-        return employeeRepository.filterActiveEmployees(filterRequestPayload.getUser(), pageable);
+        return employeeRepository.filterActiveEmployees(filterRequestPayload.getEmployee(), pageable);
     }
 
     @Transactional
