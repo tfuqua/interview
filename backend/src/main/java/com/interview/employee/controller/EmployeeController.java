@@ -3,10 +3,8 @@ package com.interview.employee.controller;
 import com.interview.employee.controller.payload.EmployeeListResponsePayload;
 import com.interview.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("employees")
@@ -20,5 +18,11 @@ public class EmployeeController {
     @GetMapping(value = "/{id}")
     public EmployeeListResponsePayload getEmployee(@PathVariable("id") Long id) {
         return new EmployeeListResponsePayload(employeeService.findActiveEmployee(id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable("id") Long id) {
+        employeeService.deleteEmployee(id);
     }
 }

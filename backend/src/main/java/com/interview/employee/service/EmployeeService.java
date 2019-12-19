@@ -3,6 +3,7 @@ package com.interview.employee.service;
 import com.interview.core.payload.exception.ResourceNotFoundException;
 import com.interview.employee.repository.EmployeeRepository;
 import com.interview.entity.Employee;
+import com.interview.entity.enums.RecordStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,5 +25,15 @@ public class EmployeeService {
         Employee active = user.orElseThrow(()->new ResourceNotFoundException(("Employee not found")));
 
         return active;
+    }
+
+    @Transactional
+    public void deleteEmployee(Long id) {
+        Optional<Employee> user = employeeRepository.findActiveUserById(id);
+
+        Employee active = user.orElseThrow(()->new ResourceNotFoundException(("Employee not found")));
+        active.setStatus(RecordStatus.PASSIVE.PASSIVE);
+
+        employeeRepository.save(active);
     }
 }
