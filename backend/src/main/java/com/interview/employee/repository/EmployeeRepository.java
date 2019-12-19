@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e WHERE e.status = com.interview.entity.enums.RecordStatus.ACTIVE and e.id=:id")
     Optional<Employee> findActiveUserById(@Param("id") Long id);
+
+    @Query("SELECT e FROM Employee e WHERE e.status = com.interview.entity.enums.RecordStatus.ACTIVE and e.email=:email")
+    Optional<Employee> findActiveUserByEmail(@Param("email") String email);
 }

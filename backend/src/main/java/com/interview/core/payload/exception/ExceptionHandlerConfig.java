@@ -22,6 +22,21 @@ public class ExceptionHandlerConfig {
     }
 
     @ExceptionHandler
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseBody
+    public ErrorResponsePayload handleDomainException(DomainException exception) {
+        return new ErrorResponsePayload(exception.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponsePayload handleBeanValidationException(MethodArgumentNotValidException exception) {
+        log.warn("Request Validation exception", exception);
+        return  new ErrorResponsePayload(exception.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+    }
+
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     @ResponseBody
     public ErrorResponsePayload handleOptimisticLockException(OptimisticLockException exception) {
