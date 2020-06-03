@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UserListContainer from './containers/UserListContainer';
 //import logo from './logo.svg';
  
 
@@ -7,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
+          <h2>Welcome to' the interview app!</h2>
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
@@ -19,6 +20,9 @@ class App extends Component {
         </or>   
        
         </header>
+        <section>
+            <UserListContainer/>
+        </section>
       </div>
     );
   }
