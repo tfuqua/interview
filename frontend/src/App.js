@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import AnimalTable from './AnimalTable';
 //import logo from './logo.svg';
- 
+import {
+  Container,
+  Paper,
+  TableContainer,
+} from '@material-ui/core';
+
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <h2>Welcome to the interview app!</h2>
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -18,7 +25,12 @@ class App extends Component {
           <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
         </or>   
        
-        </header>
+        </header> */}
+        <Container maxWidth="lg">
+          <TableContainer component={Paper}>
+            <AnimalTable />
+          </TableContainer>
+        </Container>
       </div>
     );
   }
