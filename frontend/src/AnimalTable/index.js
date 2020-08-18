@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {
+  Container,
+  Paper,
+  TableContainer,
   Table,
   TableHead,
   TableBody,
@@ -45,51 +48,57 @@ export default class AnimalTable extends Component {
 
   render() {
     const { page, rowsPerPage, animals } = this.state;
-    return animals.length > 0 ? (
-      <>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell>Text</TableCell>
-              <TableCell>User ID</TableCell>
-              <TableCell>User Name</TableCell>
-              <TableCell>Upvotes</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {animals
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((animal, index) => {
-                const rawData = animal;
-                return (
-                  <TableRow key={rawData._id}>
-                    <TableCell component="th" scope="row">
-                      {index + 1}
-                    </TableCell>
-                    <TableCell>{rawData.text}</TableCell>
-                    <TableCell>{rawData.user._id}</TableCell>
-                    <TableCell>{rawData.user.name.first + ' ' +   rawData.user.name.last}</TableCell>
-                    <TableCell>{rawData.upvotes}</TableCell>
-                  </TableRow>
-                )
-            })}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={animals.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={this.handleChangePage}
-          onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        />
-      </>
-      ) : (
-        <Typography variant="h4">
-          Loading ...
-        </Typography>
-    )
+    return (
+      <Container maxWidth="lg">
+        <TableContainer component={Paper}>
+          {animals.length > 0 ? (
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>#</TableCell>
+                  <TableCell>Text</TableCell>
+                  <TableCell>User ID</TableCell>
+                  <TableCell>User Name</TableCell>
+                  <TableCell>Upvotes</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {animals
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((animal, index) => {
+                    const rawData = animal;
+                    return (
+                      <TableRow key={rawData._id}>
+                        <TableCell component="th" scope="row">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell>{rawData.text}</TableCell>
+                        <TableCell>{rawData.user._id}</TableCell>
+                        <TableCell>{rawData.user.name.first + ' ' +   rawData.user.name.last}</TableCell>
+                        <TableCell>{rawData.upvotes}</TableCell>
+                      </TableRow>
+                    )
+                })}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={animals.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
+          </>
+          ) : (
+            <Typography variant="h4">
+              Loading ...
+            </Typography>
+          )}
+        </TableContainer>
+      </Container>
+    );
   }
 }

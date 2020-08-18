@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import AnimalTable from './AnimalTable';
 //import logo from './logo.svg';
-import {
-  Container,
-  Paper,
-  TableContainer,
-} from '@material-ui/core';
 
 
 
@@ -26,11 +21,7 @@ class App extends Component {
         </or>   
        
         </header> */}
-        <Container maxWidth="lg">
-          <TableContainer component={Paper}>
-            <AnimalTable />
-          </TableContainer>
-        </Container>
+        <AnimalTable />
       </div>
     );
   }
