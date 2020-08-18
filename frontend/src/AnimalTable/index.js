@@ -9,10 +9,24 @@ import {
   TableRow,
   TableCell,
   TablePagination,
-  Typography,
+  CircularProgress,
 } from '@material-ui/core';
 
-export default class AnimalTable extends Component {
+import { withStyles } from '@material-ui/styles';
+
+const styles = theme => ({
+  root: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  header: {
+    marginTop: '10%'
+  }
+})
+
+class AnimalTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +43,7 @@ export default class AnimalTable extends Component {
     fetch('https://cat-fact.herokuapp.com/facts')
       .then(response => response.json())
       .then((response) => this.setState({
-        animals: response.all
+        animals: response.all,
       }))
   }
 
@@ -48,9 +62,11 @@ export default class AnimalTable extends Component {
 
   render() {
     const { page, rowsPerPage, animals } = this.state;
+    const { classes } = this.props;
+
     return (
       <Container maxWidth="lg">
-        <TableContainer component={Paper}>
+        <TableContainer className={classes.header} component={Paper}>
           {animals.length > 0 ? (
           <>
             <Table>
@@ -93,12 +109,14 @@ export default class AnimalTable extends Component {
             />
           </>
           ) : (
-            <Typography variant="h4">
-              Loading ...
-            </Typography>
+            <div className={classes.root}>
+              <CircularProgress />
+            </div>
           )}
         </TableContainer>
       </Container>
     );
   }
 }
+
+export default withStyles(styles)(AnimalTable);
