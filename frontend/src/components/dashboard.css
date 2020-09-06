@@ -1,0 +1,111 @@
+
+.dashboard{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-container{
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 10px 10px 10px 10px;
+}
+
+.header{
+    color: #e3f2fd;
+}
+
+.dashTitle{
+    text-align: center;
+}
+
+.item-layout{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+}
+
+/*.note {*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    height: 180px;*/
+/*    border-radius: 10px;*/
+/*    margin: 25px;*/
+/*    box-shadow: 2px 2px;*/
+/*}*/
+
+.leftCard {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.rightCard {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.iconGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.body{
+    margin: 20px;
+}
+
+.actionBar{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.addButton{
+    padding: 10px;
+    width: 200px;
+    max-width: 50%;
+    align-self: flex-end;
+    font-weight: bold;
+    font-size: medium;
+    color: #e3f2fd;
+}
+
+.grid-container{
+    margin: 30px;
+    display: grid;
+    min-width: 200px;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+}
+
+.card_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.page {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}

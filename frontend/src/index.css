@@ -1,3 +1,30 @@
+
+.primary-color{
+  background-color: #793698;
+}
+
+.secondary-color{
+  background-color: #9744be;
+}
+
+.third-color{
+  background-color: #ac68cc;
+}
+
+.light-shade-color{
+  background-color: #c18eda;
+}
+
+.light-color{
+  background-color: #fff1fd;
+}
+
+button{
+  border: grey;
+  border-radius: 6px;
+  margin: 10px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -12,3 +39,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
