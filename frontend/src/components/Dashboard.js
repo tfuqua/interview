@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme) => ({
         background: '#fff1fd'
     },
     editIcon: {
-        color: '#9744be'
+        color: '#9744be',
+        cursor: 'pointer'
+    },
+    deleteIcon: {
+        cursor: 'pointer'
     }
 }));
 
@@ -134,7 +138,7 @@ function Dashboard(props) {
                                                 <EditTwoToneIcon className={classes.editIcon} onClick={(e) => {
                                                     editClickHandler(e,user)
                                                 }}/>
-                                                <DeleteTwoToneIcon onClick={() => {
+                                                <DeleteTwoToneIcon className={classes.deleteIcon} onClick={() => {
                                                     deleteClickHandler(user);
                                                 }}/>
                                             </div>
