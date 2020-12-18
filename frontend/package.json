@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.0",
+    "classnames": "^2.2.6",
+    "primereact": "4.2.2",
     "react": "^16.8.1",
+    "react-delay-input": "^4.1.0",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.3"
   },
