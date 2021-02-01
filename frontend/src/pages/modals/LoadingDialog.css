@@ -1,0 +1,9 @@
+.loadingDialog {
+  width: fit-content;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: calc(50% - 0.5em);
+  left: calc(50% - 3em);
+  border-radius: 0.3em;
+}

@@ -1,0 +1,98 @@
+@import '../../styles/default';
+
+.BookPage {
+  display: block;
+  flex: 1;
+  overflow: hidden;
+
+  .container {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .BookSearch {
+      text-align: center;
+      margin: 0.5em;
+    }
+
+    .BooksList {
+      overflow: auto;
+      height: 100%;
+
+      .booksGrid {
+        padding: 0 1em;
+
+        .table {
+          width: 100%;
+          border-spacing: 0;
+
+          .tableHead {
+            display: none;
+          }
+
+          .tableBody {
+
+            .tableRow {
+              text-align: center;
+
+              &:nth-child(2n -1) {
+                // default light color + alpha
+                background-color: $light-color + unquote('22');
+              }
+            }
+          }
+
+          .tableRow {
+            display: block;
+
+            .tableCell {
+              padding: 5px;
+            }
+          }
+        }
+
+        @media (min-width: 360px) {
+          .table {
+
+            .tableHead {
+              display: table-header-group;
+              color: white;
+              font-weight: bold;
+              background: $primary-color;
+            }
+
+            .tableBody {
+              display: table-row-group;
+            }
+
+            .tableRow {
+              display: table-row;
+
+              .tableCell {
+                display: table-cell;
+                vertical-align: middle;
+
+                &.bookTitle {
+                  width: 50%;
+                  text-align: left;
+                }
+
+                &.bookAuthor {
+                  width: 50%;
+                  text-align: left;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .bLoadMore {
+        display: block;
+        margin: auto;
+      }
+
+    }
+  }
+}

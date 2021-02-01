@@ -1,0 +1,15 @@
+.errorDialog {
+  margin: auto;
+  width: fit-content;
+  padding: 2em;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  div {
+    margin: 1em;
+
+    &:first-child {
+      font-weight: bold;
+    }
+  }
+}
