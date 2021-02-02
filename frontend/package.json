@@ -1,9 +1,10 @@
 {
   "name": "interview",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@rooks/use-timeout": "^4.8.0",
+    "axios": "^0.21.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.3"
