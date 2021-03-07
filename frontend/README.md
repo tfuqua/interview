@@ -12,10 +12,10 @@
 `git push origin [name_of_your_new_branch]`
 
 #### Let's install the project locally
-`npm install`
+`yarn install`
 
 #### Let's start the project locally
-`npm start`
+`yarn start`
 
 ### Goals
 1. Fetch Data from the backend Crud API you created
