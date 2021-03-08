@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 class App extends Component {
   render() {
     return (
-      <div className="p-2">
+      <div className="p-2" data-testid="root">
         <header className="App-header">
           <h2>Welcome to the interview app!</h2>
           <p>
