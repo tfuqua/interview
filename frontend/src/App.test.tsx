@@ -1,18 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import "@testing-library/jest-dom"
-import { render, screen } from '@testing-library/react'
+import React from "react";
+import App from "./App";
+import "@testing-library/jest-dom";
+import { act, render, screen } from "@testing-library/react";
+import { generateFakeNetwork } from "../test/generic";
 
 /**
- * Super basic smoke test
+ * basic smoke test aka does the app render
  */
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+test("example with testing-library", async () => {
+  act(() => {
+    render(<App network={generateFakeNetwork()} />);
+  });
+  expect(screen.getByTestId("root")).toBeVisible();
 });
-
-test('example with testing-library', () => {
-  render(<App/>)
-  expect(screen.getByTestId('root')).toBeVisible()
-})
