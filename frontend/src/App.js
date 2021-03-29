@@ -1,27 +1,23 @@
-import React, { Component } from 'react';
-//import logo from './logo.svg';
- 
+import React from 'react'; 
+import Header from './components/Header'
+import Home from './components/Home'
+import Holidays from './components/Holidays'
 
-class App extends Component {
-  render() {
+import { Routes, Route } from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from 'react-bootstrap/Container';
+
+function App() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-
-        <or>
-          <li>Fetch Data from a public API <a href="https://github.com/toddmotto/public-apis">Samples</a></li>
-          <li>Display data from API onto your page (Table, List, etc.)</li>
-          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-        </or>   
-       
-        </header>
-      </div>
+      <Container>
+        <Header/>
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/holidays' element={<Holidays/>}/>
+        </Routes>
+      </Container>
     );
   }
-}
 
 export default App;

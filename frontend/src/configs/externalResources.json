@@ -1,0 +1,6 @@
+{
+    "HOLIDAYS_SERVICE_URL": "https://date.nager.at/api",
+    "HOLIDAYS_PATH": "v2/publicholidays",
+    "HOLIDAYS_COUNTRY": "BG",
+    "HOLIDAYS_YEAR": 2021
+}
