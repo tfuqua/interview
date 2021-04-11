@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
- 
+import { BreedList } from './components/breed-list/breed-list.component';
+import { Loading } from './components/loading/loading.component';
+import './App.css';
 
 class App extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      breeds : [],
+      loading : true
+    }
+  }
+
+  componentDidMount(){
+    this.setState({loading : true});
+    fetch('https://dog.ceo/api/breeds/list')
+      .then(response => response.json())
+      .then(data => this.setState({breeds : data['message'], loading : false}));
+  }
+
   render() {
+    const breeds = this.state.breeds;
     return (
       <div className="App">
-        <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-
-        <or>
-          <li>Fetch Data from a public API <a href="https://github.com/toddmotto/public-apis">Samples</a></li>
-          <li>Display data from API onto your page (Table, List, etc.)</li>
-          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-        </or>   
-       
-        </header>
+        {this.state.loading ? <Loading /> : null}
+        <BreedList breeds={breeds}/>
       </div>
     );
   }
