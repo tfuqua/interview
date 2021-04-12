@@ -1,25 +1,44 @@
 import React from 'react'
 import 'fontsource-roboto'
-import {Button, Container, TextField, Typography} from '@material-ui/core'
+import {Button, Container, Grid, TextField, Typography} from '@material-ui/core'
 import {getQRCode} from './utils/network'
 import QRCode from './components/QRCode/QRCode'
+import {makeStyles} from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  inputField: {
+    width: 500,
+    marginBottom: 20,  
+  },
+  inputButton: {
+    height: 50, 
+    width: 500,
+    marginBottom: 20, 
+  },
+})
 
 function App() {
   // Store input for our text box.
   const [inputField, setInputField] = React.useState('')
   const [loading, setLoading] = React.useState(false)
   const [qrCodes, setQrCodes] = React.useState([])
+  const classes = useStyles()
 
   // Get a QR Code from the API endpoint.
   const handleGenerateClick = () => {
+    // Do nothing in the case of duplicates.
+    if (qrCodes.filter(qr => qr.input === inputField).length > 0)
+      return
+
+    // Otherwise grab a new image from the API endpoint.
     setLoading(true) 
     getQRCode(inputField)
       .then(qrCode => {
-        console.log(qrCode)
-        setQrCodes([...qrCodes, qrCode])
+        setQrCodes([...qrCodes.reverse(), qrCode])
       })
       .then(() => {
         setLoading(false)
+        setInputField('')
       })
       .catch((error) => {
         console.log(error)
@@ -33,14 +52,56 @@ function App() {
     URL.revokeObjectURL(tempUrl)
   }
 
-  return(
-    <Container>
-      <Typography align='center' gutterBottom variant='h2'>QR Codeler</Typography>
-      <TextField align='center' id='outlined-basic' variant='outlined' value={inputField} onChange={(event) => setInputField(event.target.value)}/>
-      <Button variant='contained' color='primary' onClick={handleGenerateClick}>Generate Code</Button>
-      <Typography align='center' gutterBottom variant='h2'>{(loading) ? 'Loading' : 'Not Loading'}</Typography>
-      {qrCodes.map(qr => <QRCode key={qr.input} qrCode={qr} remove={handleRemoveClick}/>)}
-    </Container>
+  return (
+    <Grid
+      container
+      direction='column'
+      justify='start'
+      alignItems='center'>
+      
+      <Grid item>
+        <Typography gutterBottom variant='h2'>
+          QR Code Generator
+        </Typography>
+      </Grid>
+    
+      <Grid item>
+        <TextField
+          align='center'
+          autoFocus
+          autoComplete='off'
+          className={classes.inputField}
+          disabled={loading}
+          id='outlined-basic'
+          label='Enter a String or a URL'
+          variant='outlined'
+          value={inputField}
+          onChange={(event) => setInputField(event.target.value)}
+        />
+      </Grid>
+   
+      <Grid item>
+        <Button
+          variant='contained'
+          className={classes.inputButton}
+          color='primary'
+          disabled={inputField === '' || loading}
+          onClick={handleGenerateClick}>
+          {(loading) ? 'Loading...' : 'Generate Code'}
+        </Button>
+      </Grid>
+  
+      {qrCodes.length > 0 &&  
+      <Grid 
+        item
+        container
+        direction='row'
+        justify='center'
+        alignItems='center'>
+        {qrCodes.map(qr => <QRCode key={qr.input} qrCode={qr} remove={handleRemoveClick}/>)}
+      </Grid>}
+    
+    </Grid>
   )
 }
 
