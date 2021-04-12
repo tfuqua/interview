@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   inputField: {
     height: 50,
     width: 500,
-    marginBottom: 20,  
+    marginBottom: 35,  
   },
   inputButton: {
     height: 50, 
@@ -19,11 +19,12 @@ const useStyles = makeStyles({
 })
 
 function App() {
-  // Store input for our text box.
+  // State 
   const [inputField, setInputField] = React.useState('')
   const [inputError, setInputError] = React.useState('') 
   const [loading, setLoading] = React.useState(false)
   const [qrCodes, setQrCodes] = React.useState([])
+  
   const classes = useStyles()
 
   // Get a QR Code from the API endpoint.
@@ -103,7 +104,7 @@ function App() {
       <Grid 
         item
         container
-        direction='row'
+        direction='column'
         justify='center'
         alignItems='center'>
         {qrCodes.map(qr => <QRCode key={qr.input} qrCode={qr} remove={handleRemoveClick}/>)}
