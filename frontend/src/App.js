@@ -2,6 +2,7 @@ import React from 'react'
 import 'fontsource-roboto'
 import {Button, Container, TextField, Typography} from '@material-ui/core'
 import {getQRCode} from './utils/network'
+import QRCode from './components/QRCode/QRCode'
 
 function App() {
   // Store input for our text box.
@@ -25,7 +26,7 @@ function App() {
       })
   }
 
-  // Remove our QR code from our state and also release the ObjectURL used to stop possible memory leaks.
+  // Remove our QR code from our state and also release the ObjectURL used. This helps to prevent possible memory leaks.
   const handleRemoveClick = (input) => {
     const tempUrl = qrCodes.filter(qr => qr.input === input)
     setQrCodes(qrCodes.filter(qr => qr.input !== input))
@@ -38,15 +39,7 @@ function App() {
       <TextField align='center' id='outlined-basic' variant='outlined' value={inputField} onChange={(event) => setInputField(event.target.value)}/>
       <Button variant='contained' color='primary' onClick={handleGenerateClick}>Generate Code</Button>
       <Typography align='center' gutterBottom variant='h2'>{(loading) ? 'Loading' : 'Not Loading'}</Typography>
-      {qrCodes.map(qr => {
-        return(
-        <>
-          <h3>{qr.input}</h3>
-          <img src={qr.image}></img>
-          <Button onClick={() => handleRemoveClick(qr.input)}>Remove</Button>
-        </>
-        )
-      })}
+      {qrCodes.map(qr => <QRCode key={qr.input} qrCode={qr} remove={handleRemoveClick}/>)}
     </Container>
   )
 }
