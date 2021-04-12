@@ -1,27 +1,46 @@
-import React, { Component } from 'react';
-//import logo from './logo.svg';
- 
+import React from 'react'
+import 'fontsource-roboto'
+import {Button, Container, TextField, Typography} from '@material-ui/core'
+import {getQRCode} from './utils/network'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+function App() {
+  // Store input for our text box.
+  const [inputField, setInputField] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const [qrCodes, setQrCodes] = React.useState([])
 
-        <or>
-          <li>Fetch Data from a public API <a href="https://github.com/toddmotto/public-apis">Samples</a></li>
-          <li>Display data from API onto your page (Table, List, etc.)</li>
-          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-        </or>   
-       
-        </header>
-      </div>
-    );
+  // TODO: Handle button click, check for value and get QR Code from API endpoint.
+  const handleClick = () => {
+    setLoading(true) 
+    getQRCode(inputField)
+      .then(qrCode => {
+        console.log(qrCode)
+        setQrCodes([...qrCodes, qrCode])
+      })
+      .then(() => {
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
+
+  return(
+    <Container>
+      <Typography align='center' gutterBottom variant='h2'>QR Codeler</Typography>
+      <TextField align='center' id='outlined-basic' variant='outlined' value={inputField} onChange={(event) => setInputField(event.target.value)}/>
+      <Button variant='contained' color='primary' onClick={handleClick}>Generate Code</Button>
+      <Typography align='center' gutterBottom variant='h2'>{(loading) ? 'Loading' : 'Not Loading'}</Typography>
+      {qrCodes.map(qr => {
+        return(
+        <>
+          <h3>{qr.input}</h3>
+          <img src={qr.image}></img>
+        </>
+        )
+      })}
+    </Container>
+  )
 }
 
-export default App;
+export default App
