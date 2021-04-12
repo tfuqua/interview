@@ -7,6 +7,7 @@ import {makeStyles} from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   inputField: {
+    height: 50,
     width: 500,
     marginBottom: 20,  
   },
@@ -45,7 +46,8 @@ function App() {
         setInputError('')
       })
       .catch((error) => {
-        console.log(error)
+        setInputError('Error Communicating with API: Please Try Again.')
+        setLoading(false)
       })
   }
 
