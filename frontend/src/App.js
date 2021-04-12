@@ -39,7 +39,7 @@ function App() {
     setLoading(true) 
     getQRCode(inputField)
       .then(qrCode => {
-        setQrCodes([...qrCodes.reverse(), qrCode])
+        setQrCodes([qrCode, ...qrCodes.reverse()])
       })
       .then(() => {
         setLoading(false)
