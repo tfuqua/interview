@@ -1,6 +1,6 @@
 // Define some defaults for our queries.
 const endPoint = 'https://api.qrserver.com/v1/create-qr-code/'
-const defaultSize = '128'
+const defaultSize = '150'
 
 // Convert our string to a QR Code.
 export async function getQRCode(inputString, size) {
@@ -17,5 +17,8 @@ export async function getQRCode(inputString, size) {
     if (!response.ok)
         throw new Error(`HTTP Error: ${response.status}`)
     
-    return ({input: inputString, image: URL.createObjectURL(await response.blob())})
+    return ({
+        input: inputString,
+        image: URL.createObjectURL(await response.blob()),
+    })
 }
