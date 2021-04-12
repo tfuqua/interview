@@ -1,6 +1,6 @@
 import React from 'react'
 import 'fontsource-roboto'
-import {Button, Container, Grid, TextField, Typography} from '@material-ui/core'
+import {Button, Grid, TextField, Typography} from '@material-ui/core'
 import {getQRCode} from './utils/network'
 import QRCode from './components/QRCode/QRCode'
 import {makeStyles} from '@material-ui/core/styles'
@@ -30,7 +30,7 @@ function App() {
   const handleGenerateClick = () => {
     // Set error helper in the case of duplicates.
     if (qrCodes.filter(qr => qr.input === inputField).length > 0) {
-      setInputError('Duplicate Entry')
+      setInputError('Duplicate Entry.')
       return
     }
 
@@ -62,7 +62,7 @@ function App() {
     <Grid
       container
       direction='column'
-      justify='start'
+      justify='flex-start'
       alignItems='center'>
       
       <Grid item>
