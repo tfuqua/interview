@@ -20,15 +20,18 @@ const useStyles = makeStyles({
 function App() {
   // Store input for our text box.
   const [inputField, setInputField] = React.useState('')
+  const [inputError, setInputError] = React.useState('') 
   const [loading, setLoading] = React.useState(false)
   const [qrCodes, setQrCodes] = React.useState([])
   const classes = useStyles()
 
   // Get a QR Code from the API endpoint.
   const handleGenerateClick = () => {
-    // Do nothing in the case of duplicates.
-    if (qrCodes.filter(qr => qr.input === inputField).length > 0)
+    // Set error helper in the case of duplicates.
+    if (qrCodes.filter(qr => qr.input === inputField).length > 0) {
+      setInputError('Duplicate Entry')
       return
+    }
 
     // Otherwise grab a new image from the API endpoint.
     setLoading(true) 
@@ -39,6 +42,7 @@ function App() {
       .then(() => {
         setLoading(false)
         setInputField('')
+        setInputError('')
       })
       .catch((error) => {
         console.log(error)
@@ -72,6 +76,8 @@ function App() {
           autoComplete='off'
           className={classes.inputField}
           disabled={loading}
+          error={(inputError !== '')}
+          helperText={inputError}
           id='outlined-basic'
           label='Enter a String or a URL'
           variant='outlined'
