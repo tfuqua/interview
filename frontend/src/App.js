@@ -85,6 +85,12 @@ function App() {
           label='Enter a String or a URL'
           variant='outlined'
           value={inputField}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault()
+              handleGenerateClick()
+            }
+          }}
           onChange={(event) => setInputField(event.target.value)}
         />
       </Grid>
