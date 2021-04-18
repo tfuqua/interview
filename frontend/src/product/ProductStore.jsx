@@ -1,6 +1,6 @@
 import React from "react";
 import { LoadingSpinnerContainer } from "../common/LoadingSpinnerContainer";
-import { useProductSearch } from "../common/useProductSearch";
+import { useProductSearch } from "./useProductSearch";
 import { ProductFilter } from "./ProductFilter";
 import { ProductList } from "./ProductList";
 
