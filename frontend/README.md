@@ -2,7 +2,7 @@
 
 ## Steps to get started:
 
-#### Clone the poject locally
+#### Clone the project locally
 `git clone https://github.com/tfuqua/interview.git`
 
 #### Create your own git branch
