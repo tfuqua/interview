@@ -1,31 +1,39 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
 
-const MovieCardStyle= styled.div`
+const MovieCardStyle = styled.div`
+  :hover {
+    transform: scale(1.05);
+  }
+  .poster {
+    width: 100%;
+    height: auto;
+  }
   width: 350px;
+  height: auto;
   padding: 0 1rem 1rem;
   margin: 1rem;
-  border:solid;
+  border: solid;
   display: flex;
-  flex-direction:column;
-  justify-content:space-between;
-  .supplemental{
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  .supplemental {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     padding: 0 1rem;
-    .genre{
+    .genre {
       font-style: italic;
     }
   }
-
 `
 
-const MovieCard = ({movie}) => {
+const MovieCard = ({ movie }) => {
   console.log(movie)
-  return(
+  return (
     <MovieCardStyle>
       <h2>{movie.title}</h2>
-      <img src={movie.imageUrl}/>
+      <img className="poster" src={movie.imageUrl} />
       <p>{movie.blurb}</p>
       <div className="supplemental">
         <p className="genre">{movie.genre}</p>

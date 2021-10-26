@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import MovieList from './components/MovieList';
+import React, { Component } from "react"
+import MovieList from "./components/MovieList"
 //import logo from './logo.svg';
- 
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <MovieList/>
+        <MovieList />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
