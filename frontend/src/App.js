@@ -1,27 +1,37 @@
-import React, { Component } from 'react';
-//import logo from './logo.svg';
- 
+import React, { useState, useEffect} from 'react'
+import './index.scss'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-
-        <or>
-          <li>Fetch Data from a public API <a href="https://github.com/toddmotto/public-apis">Samples</a></li>
-          <li>Display data from API onto your page (Table, List, etc.)</li>
-          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-        </or>   
-       
-        </header>
-      </div>
-    );
+export default function HousesData() {
+  const [Houses, fetchHouses] = useState([])
+  const getData = () => {
+    fetch('https://wizard-world-api.herokuapp.com/Houses')
+      .then((res) => res.json())
+      .then((res) => {
+        fetchHouses(res)
+      })
   }
-}
 
-export default App;
+  useEffect(() => {
+    getData()
+  
+  }, [])
+
+  
+
+
+  return (
+ <>
+    {Houses.map((item, i) => (
+     <div className='wrapper'>  
+      <div className="card">
+    <p key={i} className="element">Element: {item.element}</p>
+    <h1>{item.name}</h1> 
+    <hr />
+    <p className="animal"> Animal: {item.animal} </p>
+    <p className="founder">Founder: {item.founder}</p>
+    </div>
+    </div> 
+              ))}
+              </>
+)
+}

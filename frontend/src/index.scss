@@ -1,0 +1,73 @@
+$background: #DFE0DC;
+$accent: #775253;
+$textColor: #351431;
+$size_1: 1rem;
+$size_2: 2.25rem;
+$size_3: 1.2rem;
+$bold: 600;
+
+
+body {
+  font-family: arial;
+  font-size: $size_1;
+  color: $textColor;
+  line-height: 150%;
+}
+
+hr {
+  height:.1em;
+  background: $textColor;
+}
+
+h1 {
+  font-size: $size_2;
+  font-weight: $bold;
+}
+
+.wrapper {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card {
+  min-width: 15vw;
+  max-width: 15vw;
+  padding: 1em 2em;
+  margin: 2em 1em;
+  background: $background;
+  box-shadow: 5px 5px 0px $accent;  
+}
+
+
+.element {  
+  font-size: $size_3;
+  color: $accent;
+  text-transform: uppercase;
+  font-weight: $bold;
+  text-align: right;
+}
+
+.founder {
+  font-size: $size_3;
+  padding-top: 1em;
+  color: $accent;
+  text-transform: uppercase;
+  font-weight: $bold;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For mobile phones: */
+  .card {
+    min-width: 15vw;
+     max-width: 15vw;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* For mobile phones: */
+  .card {
+    min-width: 40vw;
+  }
+}
